@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="Style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script>
+        // Initialize Firebase
+        var firebaseConfig = {
+  apiKey: "AIzaSyB9lfkPHi_GnYfmxQkmZMwjAP2VnAYVXxE",
+  authDomain: "auth-30169.firebaseapp.com",
+  projectId: "auth-30169",
+  storageBucket: "auth-30169.appspot.com",
+  messagingSenderId: "730935220254",
+  appId: "1:730935220254:web:695e811fd225719d86360f"
+};
+        firebase.initializeApp(firebaseConfig);
+
+        // Set up Google Authentication
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        // Sign-in function
+        function signIn() {
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+            console.log('User signed in');
+            // Redirect to another page
+            window.location.href = "index3.html";
+            }).catch(function(error) {
+                console.log('Error in sign-in: ' + error.message);
+            });
+        }
+
+        // Sign-out function
+        function signOut() {
+            firebase.auth().signOut().then(function() {
+                console.log('User signed out');
+            }).catch(function(error) {
+                console.log('Error in sign-out: ' + error.message);
+            });
+        }
+
+        // Event listeners for sign-in and sign-out
+        window.onload = function() {
+            document.getElementById('sign-in-btn').addEventListener('click', signIn);
+            document.getElementById('sign-out').addEventListener('click', signOut);
+        }
+    </script>
+</head>
+<body>
+    <button id="sign-in-btn">Sign In with Google</button>
+    <div id="sign-out">Sign Out</div>
+</body>
+</html>
